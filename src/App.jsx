@@ -7,7 +7,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LoginPage />} />
-        <Route path="/callback" element={<Redirect />} />
+        <Route path="/oauth" element={<Redirect />} />
       </Routes>
     </BrowserRouter>
   );

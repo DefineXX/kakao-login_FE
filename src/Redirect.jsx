@@ -5,28 +5,32 @@ import { useLocation } from "react-router-dom";
 const Redirect = () => {
   const location = useLocation();
 
-  //   const queryParams = new URLSearchParams(location.search);
   const AUTH_CODE = new URLSearchParams(location.search).get("code");
   console.log(AUTH_CODE);
 
   useEffect(() => {
-    const postAuthCode = async () => {
+    const postAuthCodeToServer = async () => {
       try {
         const response = await axios.post(
-          `http://localhost:8080/callback`,
-          AUTH_CODE,
+          `http://localhost:8080/auth/login`,
           {
-            "Content-Type": "application/x-www-form-urlencoded",
+            social_provider: "Kakao",
+            authorization_code: AUTH_CODE,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
           }
         );
 
         console.log(response.data);
       } catch (error) {
-        console.log(error);
+        console.log("Authorization Code Post Error", error);
       }
     };
 
-    postAuthCode();
+    postAuthCodeToServer();
   }, [AUTH_CODE]);
 
   return (
