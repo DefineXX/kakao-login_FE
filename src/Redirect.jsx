@@ -1,14 +1,18 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
 const Redirect = () => {
   const location = useLocation();
+  const isFirstRender = useRef(true);
 
   const AUTH_CODE = new URLSearchParams(location.search).get("code");
   console.log(AUTH_CODE);
 
   useEffect(() => {
+    if (!isFirstRender.current) return;
+    isFirstRender.current = false;
+
     const postAuthCodeToServer = async () => {
       try {
         const response = await axios.post(
