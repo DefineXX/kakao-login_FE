@@ -16,7 +16,7 @@ const Redirect = () => {
     const postAuthCodeToServer = async () => {
       try {
         const response = await axios.post(
-          `http://localhost:8080/auth/login`,
+          `http://13.125.173.168:8080/auth/login`,
           {
             social_provider: "Kakao",
             authorization_code: AUTH_CODE,
